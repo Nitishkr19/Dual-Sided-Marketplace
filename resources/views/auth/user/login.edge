@@ -1,0 +1,39 @@
+@layout('layouts/app')
+@set('title', 'login page')
+
+@section('content')
+<section class="flex justify-center py-10">
+    <div class="" style="width:22rem">
+        <article class="border p-10 bg-white">
+            <h1 class="w-full  text-4xl text-center rounded  p-8 ">MeydIT</h1>
+            <form action="/user/login" method="post">
+                <div>
+                    <label for="email"></label>
+                    <input class="w-full bg-gray-200 text-xs rounded-lg p-2 border my-1" type="email" name="email"
+                        id="email" placeholder="Email" />
+                    @if(flashMessages.has('errors.email'))
+                    <small>{{ flashMessages.get('errors.email')}}</small>
+                    @endif
+                </div>
+                <div>
+                    <label for="password"></label>
+                    <input class="w-full bg-gray-200 text-xs rounded-lg p-2 border my-1" type="password" name="password"
+                        id="password" placeholder="Password" />
+                    @if(flashMessages.has('errors.password'))
+                    <small>{{ flashMessages.get('errors.password')}}</small>
+                    @endif
+                </div>
+
+                <div>
+                    <input class="w-full bg-blue-400 text-white rounded px-2 py-1 " type="submit" value="Login">
+                </div>
+            </form>
+            <p class="text-center text-gray-600 py-3">Forgot Password?</p>
+        </article>
+
+        <article class="border mt-3 text-center py-8 bg-white">
+            Don't have an accout?<a href="/user/signup" class="text-blue-500">Sign Up</a>
+        </article>
+    </div>
+</section>
+@endsection

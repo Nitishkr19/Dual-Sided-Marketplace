@@ -1,0 +1,30 @@
+@layout('layouts/app')
+@set('title', 'home page')
+
+@section('content')
+
+<main>
+  @each(post in posts)
+  <div class="border-2 bg-white w-9/12 my-6">
+    <div class="m-2 flex justify-between">
+      <div class="flex">
+        <a href="/user/{{post.user.username}}">
+          <img src="/{{post.user.avatar}}" class="h-8 w-8 rounded-full border " alt="profile">
+        </a>
+        <p class="mx-3 mt-2 font-semibold">{{post.user.username}}</p>
+      </div>
+      <div>
+        <p class="font-semibold mx-3 tracking-wider">...</p>
+      </div>
+    </div>
+    <img src="/{{post.image}}" width="100%" alt="">
+    <div class="flex">
+      <p class="font-semibold">{{post.user.username}}</p>
+      <p class="mx-3">{{post.caption}}</p>
+    </div>
+    <p class="text-gray-500 text-xs my-5">{{post.createdAt.toFormat('DD')}}</p>
+  </div>
+  @endeach
+</main>
+
+@endsection

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>{{ title }}</title>
+</head>
+
+<body>
+    <div class="bg-gray-100 min-h-screen">
+        <nav class=" relative w-full bg-white shadow-md border flex justify-start sticky top-0 border p-8">
+            <div class="px-5"><a href="/">MeydIT</a></div>
+            @if(auth.use('user').isAuthenticated)
+            <div class="px-10"><a href="/user/home">Home</a></div>
+            <div class="px-10"><a href='/user/{{auth.user.username}}'>Profile</a></div>
+            <div class="px-10"><a href="/posts/create">Posts</a></div>
+            <div class=" absolute right-3 inline-block text-left">
+                <button id="dropdown" class="outline-none focus-none px-5 py-0">
+                    <img src="/{{auth.user.avatar}}" class=" h-9 w-9 rounded-full border " alt="profile">
+                </button>
+
+                <div id="dropdown-items"
+                    class="hidden absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                    role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+                    <div class="py-1" role="none">
+                        <a href="/accounts/edit" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1">Account
+                            settings</a>
+                        <form method="POST" action="/user/logout" role="none">
+                            <button type="submit" class="text-gray-700 block w-full px-4 py-2 text-left text-sm"
+                                role="menuitem" tabindex="-1">Sign out</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            @elseif(auth.use('maker').isAuthenticated)
+            <div class="px-10"><a href="/maker/home">Home</a></div>
+            <div class="px-10"><a href='/maker/{{auth.user.username}}'>Profile</a></div>
+            <div class=" absolute right-3 inline-block text-left">
+                <button id="dropdown" class="outline-none focus-none px-5 py-0">
+                    <img src="/{{auth.user.avatar}}" class=" h-9 w-9 rounded-full border " alt="profile">
+                </button>
+
+                <div id="dropdown-items"
+                    class="hidden absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                    role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+                    <div class="py-1" role="none">
+                        <a href="/accounts/edit" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1">Account
+                            settings</a>
+                        <form method="POST" action="/maker/logout" role="none">
+                            <button type="submit" class="text-gray-700 block w-full px-4 py-2 text-left text-sm"
+                                role="menuitem" tabindex="-1">Sign out</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            @else
+            <div class="absolute right-3 flex justify-center">
+                <div class="px-5"><a href="/user/login">login for consumer</a></div>
+                <div class="px-5"><a href="/maker/login">login for maker</a></div>
+            </div>
+            @end
+        </nav>
+        <section class="flex justify-center py-10">
+            <div class="" style="width:60rem">
+                @section('content')
+                @endsection
+            </div>
+        </section>
+    </div>
+    <script>
+        const avat = document.getElementById('dropdown')
+        const item = document.getElementById('dropdown-items')
+        avat.addEventListener("click", () => {
+            if (item.classList.contains('hidden')) {
+                item.classList.remove('hidden')
+            }
+            else {
+                item.classList.add('hidden')
+            }
+        })
+    </script>
+</body>
+
+</html>

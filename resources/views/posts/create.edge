@@ -1,0 +1,19 @@
+@layout('layouts/app')
+@set('title', 'profile page')
+
+@section('content')
+<div class="w-full bg-grey-700">
+    <h1 class="text-ceter text-2xl my-4">Create new Post</h1>
+    <form action="/posts/create" method="post" class="py-2" enctype="multipart/form-data">
+        <label for="details">
+            <div>
+                <h2 class my-2>Caption</h2><textarea class=" w-full border" rows="4" name="caption"
+                    placeholder="your caption comes here"></textarea>
+            </div>
+            <h2 class="my-2">upload posts<input type="file" class="w-full" name="image" id=""></h2>
+            <input type="submit" value="update" class="px-2 py-1 bg-blue-500 text-white border rounded">
+        </label>
+    </form>
+</div>
+
+@endsection

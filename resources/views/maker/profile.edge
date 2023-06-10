@@ -1,0 +1,18 @@
+@layout('layouts/app')
+@set('title', 'profile page')
+
+@section('content')
+
+<div class="relative">
+    <div><img src="/{{user.avatar}}" class="absolute right-3 h-40 w-40 rounded-full border " alt="profile"></div>
+    <div class="">username : {{user.username}}</div>
+    <div>Name : {{user.name}}</div>
+    @if(auth.user.email_verified_at ==null)
+    <form action="/maker/verify-email" method="post">
+        <input type="submit" value="Resend">
+    </form>
+    @endif
+    <div>bio : {{user.details}}</div>
+    <div><a href="/accounts/edit">Edit profile</a></div>
+</div>
+@endsection

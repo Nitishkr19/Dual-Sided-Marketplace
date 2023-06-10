@@ -1,0 +1,51 @@
+@layout('layouts/app')
+@set('title', 'profile page')
+
+@section('content')
+
+<div>
+    <div class="flex">
+        <div><img src="/{{user.avatar}}" class="h-40 w-40 rounded-full border " alt="profile"></div>
+        <div>
+            <div class="">username : {{user.username}}</div>
+            <div>Name : {{user.name}}</div>
+            @if(auth.user.email_verified_at ==null)
+            <form action="/verify-email" method="post">
+                <input type="submit" value="Resend">
+            </form>
+            @endif
+            <div>bio : {{user.details}}</div>
+            @if(auth.user.id == user.id)
+            <div><a href="/accounts/edit">Edit profile</a></div>
+            @endif
+        </div>
+    </div>
+    <div class="pt-20">
+        <hr>
+    </div>
+    <p class="text-align-center font-bold">POST</p>
+    <div class="flex justify-center py-10">
+        @each(post in user.posts)
+        <div class="border-2 bg-white w-9/12 my-6">
+            <div class="m-2 flex justify-between">
+                <div class="flex">
+                    <a href="/user/{{user.username}}">
+                        <img src="/{{user.avatar}}" class="h-8 w-8 rounded-full border " alt="profile">
+                    </a>
+                    <p class="mx-3 mt-2 font-semibold">{{user.username}}</p>
+                </div>
+                <div>
+                    <p class="font-semibold mx-3 tracking-wider">...</p>
+                </div>
+            </div>
+            <img src="/{{post.image}}" width="100%" alt="">
+            <div class="flex">
+                <p class="font-semibold">{{user.username}}</p>
+                <p class="mx-3">{{post.caption}}</p>
+            </div>
+            <p class="text-gray-500 text-xs my-5">{{post.createdAt.toFormat('DD')}}</p>
+        </div>
+        @endeach
+    </div>
+</div>
+@endsection

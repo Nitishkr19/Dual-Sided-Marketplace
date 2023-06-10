@@ -1,0 +1,27 @@
+@layout('layouts/app')
+@set('title', 'home page')
+
+@section('content')
+<main>
+  @if(auth.use('user').isAuthenticated)
+  <h1>Welcome {{auth.user.name}} to MeydIT</h1>
+  <h2>Click here to get <a href='/{{auth.user.username}}'>started</a></h2>
+  <form action="/user/logout" method="post">
+    <button type="submit">Sign Out</button>
+  </form>
+  @elseif(auth.use('maker').isAuthenticated)
+  <h1>Welcome {{auth.user.name}} to MeydIT</h1>
+  <h2>Click here to get <a href='/{{auth.user.username}}'>started</a></h2>
+  <form action="/maker/logout" method="post">
+    <button type="submit">Sign Out</button>
+  </form>
+  @else
+  <h1>Welcome to MeydIT</h1>
+  <h2>Please
+    <div><a href="/user/login">Login for Consumer</a></div>
+    <div><a href="/maker/login">Login for maker</a></div>
+    to get started
+  </h2>
+  @end
+</main>
+@endsection
